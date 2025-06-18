@@ -2,32 +2,24 @@
   <div class="p-4">
     <h1 class="text-2xl font-bold mb-4">MCP Inspector Vue3</h1>
     <div class="mb-2">
-      <label class="mr-2">Command:</label>
-      <input v-model="command" class="border p-1" />
-      <label class="ml-2 mr-2">Args:</label>
-      <input v-model="args" class="border p-1" />
-      <button @click="run" class="ml-2 border px-2 py-1">Run</button>
+      <Label class="mr-2">Command:</Label>
+      <Input v-model="command" class="w-40" />
+      <Label class="ml-2 mr-2">Args:</Label>
+      <Input v-model="args" class="w-40" />
+      <Button @click="run" class="ml-2">Run</Button>
     </div>
     <div class="mb-2">
-      <label class="mr-2">MCP URL:</label>
-      <input v-model="mcpUrl" class="border p-1 w-96" />
-      <button @click="connectMcp" class="ml-2 border px-2 py-1">Connect</button>
-      <button @click="disconnectMcp" class="ml-2 border px-2 py-1">
-        Close
-      </button>
+      <Label class="mr-2">MCP URL:</Label>
+      <Input v-model="mcpUrl" class="w-96" />
+      <Button @click="connectMcp" class="ml-2">Connect</Button>
+      <Button @click="disconnectMcp" class="ml-2">Close</Button>
     </div>
 
     <div v-if="connected" class="mb-2 space-x-2">
-      <button @click="activeTab = 'resources'" class="border px-2 py-1">
-        Resources
-      </button>
-      <button @click="activeTab = 'prompts'" class="border px-2 py-1">
-        Prompts
-      </button>
-      <button @click="activeTab = 'tools'" class="border px-2 py-1">
-        Tools
-      </button>
-      <button @click="activeTab = 'ping'" class="border px-2 py-1">Ping</button>
+      <Button @click="activeTab = 'resources'">Resources</Button>
+      <Button @click="activeTab = 'prompts'">Prompts</Button>
+      <Button @click="activeTab = 'tools'">Tools</Button>
+      <Button @click="activeTab = 'ping'">Ping</Button>
     </div>
 
     <component :is="currentTab" v-if="connected" :send-request="sendRequest" />
@@ -45,6 +37,7 @@ import PromptsTab from "./components/PromptsTab.vue";
 import ToolsTab from "./components/ToolsTab.vue";
 import PingTab from "./components/PingTab.vue";
 import HistoryView from "./components/HistoryView.vue";
+import { Button, Input, Label } from "./components/ui";
 
 const command = ref("echo");
 const args = ref("hello");

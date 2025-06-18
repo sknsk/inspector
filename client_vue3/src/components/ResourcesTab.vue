@@ -1,8 +1,6 @@
 <template>
   <div class="p-2">
-    <button @click="listResources" class="border px-2 py-1 mb-2">
-      List Resources
-    </button>
+    <Button @click="listResources" class="mb-2">List Resources</Button>
     <ul class="mb-2">
       <li
         v-for="r in resources"
@@ -19,6 +17,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { Button } from "./ui";
 const props = defineProps<{
   sendRequest: (m: string, p: any) => Promise<any>;
 }>();
