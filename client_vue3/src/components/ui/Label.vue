@@ -1,17 +1,17 @@
 <template>
-  <label
-    :for="forId"
-    :class="['text-sm font-medium', $attrs.class]"
-    v-bind="attrsWithoutClass"
-    ><slot
-  /></label>
+  <v-label v-bind="attrsWithoutClass" :for="forId">
+    <slot />
+  </v-label>
 </template>
+
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, useAttrs } from "vue";
+import { VLabel } from "vuetify/components";
+
 const props = defineProps<{ forId?: string }>();
 const attrs = useAttrs();
 const attrsWithoutClass = computed(() => {
-  const { class: cls, ...rest } = attrs;
+  const { class: _cls, ...rest } = attrs as any;
   return rest;
 });
 </script>

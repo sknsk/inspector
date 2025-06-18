@@ -1,19 +1,23 @@
 <template>
-  <textarea
-    :rows="rows"
-    :class="[
-      'flex w-full rounded-md border px-3 py-1 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50',
-      $attrs.class,
-    ]"
-    v-bind="attrsWithoutClass"
-  ></textarea>
+  <v-textarea v-model="model" :rows="rows" v-bind="attrsWithoutClass" />
 </template>
+
 <script setup lang="ts">
-import { computed } from "vue";
-const props = withDefaults(defineProps<{ rows?: number }>(), { rows: 3 });
+import { computed, useAttrs } from "vue";
+import { VTextarea } from "vuetify/components";
+
+const props = withDefaults(defineProps<{ modelValue?: any; rows?: number }>(), {
+  rows: 3,
+});
+const emit = defineEmits(["update:modelValue"]);
 const attrs = useAttrs();
 const attrsWithoutClass = computed(() => {
-  const { class: cls, ...rest } = attrs;
+  const { class: _cls, ...rest } = attrs as any;
   return rest;
+});
+
+const model = computed({
+  get: () => props.modelValue,
+  set: (v) => emit("update:modelValue", v),
 });
 </script>
