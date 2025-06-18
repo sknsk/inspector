@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+sse-starlette
+aiohttp
+aiohttp_sse
+mcp[cli]
